@@ -1,39 +1,32 @@
 NAME = pipex
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilibft
 
 SRCS_DIR = srcs
 INCS_DIR = include
-OBJS_DIR = bin
 
-SRCS = $(SRCS_DIR)/main.c
-OBJS = $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
+SRCS = main.c pipex.c
 
-# Create directories if they don't exist
-$(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
+PATH_SRCS = $(patsubst %, $(SRCS_DIR)/%, $(SRCS))
 
-# Compile object files
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
-	$(CC) $(CFLAGS) -I$(INCS_DIR) -c $< -o $@
+LFT = libft/libft.a
 
-# Link object files to create executable
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
-
-# Default target
 all: $(NAME)
 
-# Clean object files
+$(LFT):
+	$(MAKE) -C libft
+
+$(NAME): $(PATH_SRCS) $(LFT)
+	$(CC) $(CFLAGS) $^ -o $@
+
 clean:
-	rm -f $(OBJS)
+	@$(MAKE) -C libft clean 
 
-# Clean everything
 fclean: clean
-	rm -f $(NAME)
+	@$(MAKE) -C libft fclean 
+	@rm -f $(NAME)
 
-	# Rebuild everything
 re: fclean all
 
 .PHONY: all clean fclean re
