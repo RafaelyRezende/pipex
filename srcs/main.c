@@ -16,19 +16,20 @@ int main(int argc, char **argv, char **envp)
 		ft_printf("Wrong number of arguments");
 		return (-1);
 	}
-	ft_print_pid();
 	cmd_lst = NULL;
 	current = NULL;
 	if (ft_get_commands(&cmd_lst, &argv[1], argc))
+		return (ft_cleanup_env(&cmd_lst), -1);
+	if (ft_get_split_commands(&cmd_lst))
 		return (ft_cleanup_env(&cmd_lst), -1);
 	current = cmd_lst;
 	while (current)
 	{
 		current->cmd_path = ft_get_fullpath(envp, current);
-		ft_printf("%s\t\t%s\t\t%d\n",
+		ft_printf("%s\t\t%s\t\t%s\n",
 						current->cmd_str,
 						current->cmd_path,
-						current->status);
+						current->cmd_split[0]);
 		current = current->next;
 	}
 	ft_cleanup_env(&cmd_lst);
@@ -40,6 +41,8 @@ void	ft_free_all(char **split)
 {
 	int	i;
 
+	if (!split)
+		return ;
 	i = 0;
 	while (split[i])
 		free(split[i++]);
@@ -60,6 +63,10 @@ void	ft_cleanup_env(t_cmd **cmd_lst)
 			free((*cmd_lst)->cmd_str);
 		if ((*cmd_lst)->cmd_path)
 			free((*cmd_lst)->cmd_path);
+		if ((*cmd_lst)->cmd_split)
+			ft_free_all((*cmd_lst)->cmd_split);
+		else
+			free((*cmd_lst)->cmd_split);
 		free(*cmd_lst);
 		*cmd_lst = ptr_next;
 	}
@@ -100,7 +107,7 @@ char	*ft_get_fullpath(char **envp, t_cmd *head)
 		envp++;
 	}
 	secure_paths = ft_split(*envp, ':');
-	tmp = ft_verify_command(secure_paths, head->cmd_str);
+	tmp = ft_verify_command(secure_paths, head->cmd_split[0]);
 	ft_free_all(secure_paths);
 	return (tmp);
 }
@@ -122,4 +129,23 @@ char	*ft_verify_command(char **s_paths, char *cmd)
 		s_paths++;
 	}
 	return (NULL);
+}
+
+int	ft_get_split_commands(t_cmd **head)
+{
+	t_cmd	*current;
+	char	**tmp_split;
+
+	if (!head || !*head)
+		return (-1);
+	current = *head;
+	while (current)
+	{
+		tmp_split = ft_split(current->cmd_str, ' ');
+		if (!tmp_split)
+			return (-1);
+		current->cmd_split = tmp_split;
+		current = current->next;
+	}
+	return (0);
 }

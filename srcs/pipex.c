@@ -1,10 +1,5 @@
 #include "libpipex.h"
 
-void	ft_print_pid(void)
-{
-	ft_printf("PID -> %d\n", getpid());
-}
-
 t_cmd	*ft_create_command(char *str)
 {
 	t_cmd	*new;
@@ -18,7 +13,7 @@ t_cmd	*ft_create_command(char *str)
 	if (!new->cmd_str)
 		return (free(new), NULL);
 	new->cmd_path = NULL;
-	new->status = INT_MIN;
+	new->cmd_split= NULL;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

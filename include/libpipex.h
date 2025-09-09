@@ -12,14 +12,14 @@ typedef struct s_cmd
 {
 	char			*cmd_str;
 	char			*cmd_path;
-	int				status;
+	char			**cmd_split;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
 
-void	ft_print_pid(void);
 void	ft_addfront(t_cmd **head, t_cmd *new);
 void	ft_addback(t_cmd **head, t_cmd *new);
 t_cmd	*ft_create_command(char *str);
+int		ft_get_split_commands(t_cmd **head);
 
 #endif
