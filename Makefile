@@ -9,7 +9,7 @@ SRCS_DIR = srcs
 INCS_DIR = include
 TEST_DIR = unit_test
 
-SRCS = main.c pipex.c parser.c garbage_collector.c
+SRCS = main.c driver.c pipex.c parser.c garbage_collector.c
 
 TEST_SRC = unit.c
 
