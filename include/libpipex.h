@@ -1,5 +1,17 @@
-#ifndef PIPEX_H
-# define PIPEX_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libpipex.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/16 08:44:30 by rluis-ya          #+#    #+#             */
+/*   Updated: 2025/09/16 08:53:01 by rluis-ya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIBPIPEX_H
+# define LIBPIPEX_H
 # define READ_END 0
 # define WRITE_END 1
 # define INFILE_FD 0

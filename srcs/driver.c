@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   driver.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/16 08:45:07 by rluis-ya          #+#    #+#             */
+/*   Updated: 2025/09/16 08:54:01 by rluis-ya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libpipex.h"
 
 int	ft_process_split(t_env *this, t_cmd *current, char **envp)
@@ -20,7 +32,8 @@ int	ft_process_split(t_env *this, t_cmd *current, char **envp)
 		}
 		else
 			ft_process_cmd2cmd(this, current);
-		if (current->cmd_path && execve(current->cmd_path, current->cmd_split, envp) == -1)
+		if (current->cmd_path && execve(current->cmd_path, \
+current->cmd_split, envp) == -1)
 			ft_cleanup_error("exec", this);
 	}
 	if (!current->prev)

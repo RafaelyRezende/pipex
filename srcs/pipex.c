@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/16 08:46:58 by rluis-ya          #+#    #+#             */
+/*   Updated: 2025/09/16 09:00:45 by rluis-ya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libpipex.h"
 
 t_cmd	*ft_create_command(char *str)
@@ -61,6 +73,7 @@ int	ft_init_env(t_env *this, int argc, char **argv, char **envp)
 		return (-1);
 	if (ft_get_split_commands(&this->head_cmd))
 		return (-1);
+	this->status = 0;
 	current = this->head_cmd;
 	while (current)
 	{
