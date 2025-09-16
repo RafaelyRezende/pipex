@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:44:30 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/16 08:53:01 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:15:50 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_cmd
 	char			*cmd_path;
 	char			**cmd_split;
 	pid_t			pipe_fd[2];
+	pid_t			pid;
 	struct s_cmd	*next;
 	struct s_cmd	*prev;
 }	t_cmd;
@@ -40,7 +41,7 @@ typedef struct s_env
 	t_cmd	*head_cmd;
 	char	*infile;
 	char	*outfile;
-	int		*status;
+	int		status;
 	int		file_fd[2];
 }	t_env;
 

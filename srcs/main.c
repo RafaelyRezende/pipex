@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:05:06 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/16 09:00:09 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:15:47 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,16 @@ O_WRONLY | O_CREAT | O_TRUNC, 0671);
 			ft_process_finisher(&this, current, envp);
 			break ;
 		}
-		current->pipe_fd[READ_END] = ft_process_split(&this, current, envp);
+		current->pid = ft_process_split(&this, current, envp);
 		current = current->next;
 	}
-	waitpid(0, this.status, 0);
-	return (ft_cleanup_all(&this), 0);
+	current = this.head_cmd;
+	while (current)
+	{
+		waitpid(current->pid, &this.status, 0);
+		current = current->next;
+	}
+	return (ft_cleanup_all(&this), WEXITSTATUS(this.status));
 }
 
 static

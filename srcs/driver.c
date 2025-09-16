@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:45:07 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/16 08:54:01 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:21:18 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,13 @@ int	ft_process_split(t_env *this, t_cmd *current, char **envp)
 		}
 		else
 			ft_process_cmd2cmd(this, current);
-		if (current->cmd_path && execve(current->cmd_path, \
-current->cmd_split, envp) == -1)
+		if (current->cmd_path != NULL && execve(current->cmd_path, current->cmd_split, envp) == -1)
 			ft_cleanup_error("exec", this);
 	}
 	if (!current->prev)
 		close(this->file_fd[INFILE_FD]);
 	close(current->pipe_fd[WRITE_END]);
-	return (current->pipe_fd[READ_END]);
+	return (process_id);
 }
 
 int	ft_process_finisher(t_env *this, t_cmd *current, char **envp)
@@ -56,11 +55,12 @@ int	ft_process_finisher(t_env *this, t_cmd *current, char **envp)
 		if (dup2(current->prev->pipe_fd[READ_END], STDIN_FILENO) == -1)
 			ft_cleanup_error("dup", this);
 		ft_close_all(this, current);
-		if (execve(current->cmd_path, current->cmd_split, envp) == -1)
+		if (current->cmd_path != NULL && execve(current->cmd_path, current->cmd_split, envp) == -1)
 			ft_cleanup_error("exec", this);
 	}
-	close(current->pipe_fd[READ_END]);
-	return (0);
+	close(current->pipe_fd[WRITE_END]);
+	close(current->prev->pipe_fd[READ_END]);
+	return (process_id);
 }
 
 void	ft_process_cmd2cmd(t_env *this, t_cmd *current)
@@ -74,6 +74,7 @@ void	ft_process_cmd2cmd(t_env *this, t_cmd *current)
 
 void	ft_close_all(t_env *this, t_cmd *current)
 {
+
 	if (this->file_fd[INFILE_FD])
 		close(this->file_fd[INFILE_FD]);
 	if (this->file_fd[OUTFILE_FD])
