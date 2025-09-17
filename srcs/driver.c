@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:45:07 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/16 19:21:18 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/17 09:33:44 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 int	ft_process_split(t_env *this, t_cmd *current, char **envp)
 {
-	int	process_id;
-
 	pipe(current->pipe_fd);
-	process_id = fork();
-	if (process_id == -1)
+	current->pid = fork();
+	if (current->pid == -1)
 		ft_err_fork(this);
-	else if (process_id == 0)
+	else if (current->pid == 0)
 	{
 		if (!current->prev)
 		{
@@ -38,7 +36,7 @@ int	ft_process_split(t_env *this, t_cmd *current, char **envp)
 	if (!current->prev)
 		close(this->file_fd[INFILE_FD]);
 	close(current->pipe_fd[WRITE_END]);
-	return (process_id);
+	return (current->pid);
 }
 
 int	ft_process_finisher(t_env *this, t_cmd *current, char **envp)

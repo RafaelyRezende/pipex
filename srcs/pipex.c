@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:46:58 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/16 09:00:45 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/17 09:33:46 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ t_cmd	*ft_create_command(char *str)
 		return (free(new), NULL);
 	new->cmd_path = NULL;
 	new->cmd_split = NULL;
+	new->pipe_fd[0] = -1;
+	new->pipe_fd[1] = -1;
+	new->pid = -1;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
