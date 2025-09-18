@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:45:39 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/16 19:27:32 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/18 12:16:07 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,16 @@ void	ft_cleanup_all(t_env *this)
 	ft_cleanup_lst(&this->head_cmd);
 }
 
-void	ft_cleanup_error(const char *str, t_env *this)
-{
-	perror(str);
-	ft_cleanup_all(this);
-	exit(1);
-}
-
 int	ft_error_args(void)
 {
 	ft_printf("Too few arguments");
 	return (-1);
+}
+
+void	ft_err_pipe(t_env *this, int *prev_pipe)
+{
+	perror("pipe");
+	if (*prev_pipe != -1)
+		close(*prev_pipe);
+	ft_close_files(this, 1);
 }

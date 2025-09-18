@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:44:30 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/16 19:54:26 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/18 12:26:01 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ int		ft_get_split_commands(t_cmd **head);
 void	ft_cleanup_lst(t_cmd **cmd_lst);
 void	ft_free_all(char **split);
 void	ft_cleanup_all(t_env *this);
-void	ft_cleanup_error(const char *str, t_env *this);
-void	ft_err_fork(t_env *this);
+void	ft_err_fork(t_env *this, t_cmd *current, int *prev_pipe);
 int		ft_error_args(void);
+void	ft_err_dir(t_env *this);
+void	ft_err_handle(t_env *this, const char *str);
+void	ft_close_files(t_env *this, int scape);
+void	ft_close_pipes(t_cmd *current);
 /*	PARSER COMMANDS	*/
 int		ft_get_commands(t_cmd **head, char **av, int ac);
 char	*ft_verify_command(char **s_paths, char *cmd);
@@ -63,8 +66,9 @@ char	*ft_get_fullpath(char **envp, t_cmd *head);
 int		ft_get_filename(t_env *this, int ac, char **av);
 int		ft_init_env(t_env *this, int argc, char **argv, char **envp);
 /*	DRIVER	*/
-int		ft_process_split(t_env *this, t_cmd *current, char **envp);
-int		ft_process_finisher(t_env *this, t_cmd *current, char **envp);
-void	ft_process_cmd2cmd(t_env *this, t_cmd *current);
-void	ft_close_all(t_env *this, t_cmd *current);
+void	ft_parent_logic(t_cmd *current, int *prev_pipe);
+void	ft_finish_pipex(t_env *this, int *prev_pipe);
+void	ft_exec_child(t_env *this, t_cmd *current, char **envp, int *prev_pipe);
+void	ft_err_pipe(t_env *this, int *prev_pipe);
+void	ft_dup_handle(t_env *this, t_cmd *current);
 #endif
