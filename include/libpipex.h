@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:44:30 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/18 12:26:01 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/18 21:30:06 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,8 @@ void	ft_finish_pipex(t_env *this, int *prev_pipe);
 void	ft_exec_child(t_env *this, t_cmd *current, char **envp, int *prev_pipe);
 void	ft_err_pipe(t_env *this, int *prev_pipe);
 void	ft_dup_handle(t_env *this, t_cmd *current);
+/*	BONUS   */
+int 	ft_ishere_doc(char **argv);
+void	ft_here_doc(int argc, char **argv, char **envp);
+int 	ft_init_here(t_env *this, int argc, char **argv, char **envp);
 #endif
