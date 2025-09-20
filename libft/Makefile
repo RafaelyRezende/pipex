@@ -6,13 +6,13 @@
 #    By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/12 11:40:36 by rluis-ya          #+#    #+#              #
-#    Updated: 2025/09/03 18:47:24 by rluis-ya         ###   ########.fr        #
+#    Updated: 2025/09/20 16:47:38 by rluis-ya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 DEBUG = gdb --tui
 

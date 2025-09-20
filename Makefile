@@ -6,50 +6,81 @@
 #    By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/16 08:47:29 by rluis-ya          #+#    #+#              #
-#    Updated: 2025/09/16 08:47:46 by rluis-ya         ###   ########.fr        #
+#    Updated: 2025/09/20 18:14:27 by rluis-ya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = pipex
-
-UNIT = unit
+# Flags #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Iinclude -Ilibft -g
 
-SRCS_DIR = srcs
-INCS_DIR = include
-TEST_DIR = unit_test
+NAME = pipex
 
-SRCS = main.c driver.c pipex.c parser.c garbage_collector.c garbage_collector_utils.c
+NAME_BONUS = pipex_bonus
 
-TEST_SRC = unit.c
+HEADER = include/libpipex.h
 
-PATH_SRCS = $(patsubst %, $(SRCS_DIR)/%, $(SRCS))
+HEADER_BONUS = include/libpipex_bonus.h
 
-PATH_TEST = $(patsubst %, $(TEST_DIR)/%, $(TEST_SRC))
+CFLAGS = -Wall -Werror -Wextra -Iinclude -Ilibft -g
+
+# Files #
+
+SRC = srcs/main.c \
+			srcs/driver.c \
+			srcs/pipex.c \
+			srcs/pipex_utils.c \
+			srcs/parser.c \
+			srcs/garbage_collector.c \
+			srcs/garbage_collector_utils.c
+
+SRC_BONUS = bonus_dir/main_bonus.c \
+			 bonus_dir/driver_bonus.c \
+			 bonus_dir/pipex_bonus.c \
+			 bonus_dir/pipex_utils_bonus.c \
+			 bonus_dir/parser_bonus.c \
+			 bonus_dir/garbage_collector_bonus.c \
+			 bonus_dir/garbage_collector_utils_bonus.c \
+			 bonus_dir/here_doc_bonus.c
 
 LFT = libft/libft.a
 
+OBJS = $(SRC:.c=.o)
+
+OBJS_BONUS = $(SRC_BONUS:.c=.o)
+
+%.o:%.c 
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+# Rules #
+
 all: $(NAME)
 
+bonus: $(NAME_BONUS)
+
+$(NAME): $(OBJS) $(LFT)
+	@$(CC) $(CFLAGS) $^ -o $(NAME)
+	@echo "Compiled Program"
+
+$(NAME_BONUS): $(OBJS_BONUS) $(LFT)
+	@$(CC) $(CFLAGS) $^ -o $(NAME_BONUS)
+	@echo "Compiled Bonus"
+
 $(LFT):
-	@$(MAKE) -C libft
-
-$(NAME): $(PATH_SRCS) $(LFT)
-	$(CC) $(CFLAGS) $^ -o $@
-
-$(UNIT): $(PATH_TEST) $(LFT)
-	$(CC) $(CFLAGS) $^ -o $@
+		@$(MAKE) -C libft
+norm:
+	@norminette -R CheckForbiddenSourceHeader $(SRC) $(HEADER) $(SRC_BONUS) $(HEADER_BONUS)
 
 clean:
-	@$(MAKE) -C libft clean 
+	@$(MAKE) -C libft clean
+	@rm -f $(OBJS) $(OBJS_BONUS)
+	@echo "Cleaned object files"
 
 fclean: clean
-	@$(MAKE) -C libft fclean 
-	@rm -f $(UNIT) 
-	@rm -f $(NAME)
+	@$(MAKE) -C libft fclean
+	@rm -f $(NAME) $(NAME_BONUS)
+	@echo "Removed Program"
 
 re: fclean all
 
-.PHONY: all clean fclean re test unit
+.PHONY: all clean fclean re bonus

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage_collector.c                                :+:      :+:    :+:   */
+/*   garbage_collector_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:45:39 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 15:04:43 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:54:17 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libpipex.h"
+#include "libpipex_bonus.h"
 
 void	ft_free_all(char **split)
 {
@@ -60,6 +60,11 @@ void	ft_cleanup_all(t_env *this)
 	{
 		free(this->outfile);
 		this->outfile = NULL;
+	}
+	if (this->limiter)
+	{
+		free(this->limiter);
+		this->limiter = NULL;
 	}
 	ft_cleanup_lst(&this->head_cmd);
 }

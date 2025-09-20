@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:46:24 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 16:51:54 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:05:29 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libpipex.h"
+#include "libpipex_bonus.h"
 
 int	ft_get_commands(t_cmd **head, char **av, int ac)
 {
@@ -58,6 +58,8 @@ char	*ft_verify_command(char **s_paths, char *cmd)
 	char	*tmp;
 	char	*tmp2;
 
+	if (!cmd)
+		return (NULL);
 	while (*s_paths)
 	{
 		tmp = ft_strjoin(*s_paths, "/");
@@ -82,7 +84,7 @@ int	ft_get_split_commands(t_cmd **head)
 	while (current)
 	{
 		tmp_split = ft_split(current->cmd_str, ' ');
-		if (!tmp_split || !*tmp_split)
+		if (!tmp_split)
 			return (-1);
 		current->cmd_split = tmp_split;
 		current = current->next;

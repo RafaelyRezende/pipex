@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libpipex.h                                         :+:      :+:    :+:   */
+/*   libpipex_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:44:30 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 15:19:53 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/20 15:33:19 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBPIPEX_H
-# define LIBPIPEX_H
+#ifndef LIBPIPEX_BONUS_H
+# define LIBPIPEX_BONUS_H
 # define READ_END 0
 # define WRITE_END 1
 # define INFILE_FD 0
@@ -41,6 +41,7 @@ typedef struct s_env
 	t_cmd	*head_cmd;
 	char	*infile;
 	char	*outfile;
+	char	*limiter;
 	int		status;
 	int		file_fd[2];
 }	t_env;
@@ -72,4 +73,10 @@ void	ft_finish_pipex(t_env *this, int *prev_pipe);
 void	ft_exec_child(t_env *this, t_cmd *current, char **envp, int *prev_pipe);
 void	ft_err_pipe(t_env *this, int *prev_pipe);
 void	ft_dup_handle(t_env *this, t_cmd *current);
+/*	BONUS   */
+int		ft_ishere_doc(char **argv);
+void	ft_here_doc(int argc, char **argv, char **envp);
+int		ft_init_here(t_env *this, int argc, char **argv, char **envp);
+void	ft_loop(t_env *this);
+int		ft_create_file(t_env *this, int argc, char **argv);
 #endif

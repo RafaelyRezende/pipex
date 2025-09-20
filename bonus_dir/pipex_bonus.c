@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:46:58 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 15:33:22 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:36:24 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libpipex.h"
+#include "libpipex_bonus.h"
 
 t_cmd	*ft_create_command(char *str)
 {
@@ -81,8 +81,6 @@ int	ft_init_env(t_env *this, int argc, char **argv, char **envp)
 	while (current)
 	{
 		current->cmd_path = ft_get_fullpath(envp, current);
-		if (!current->cmd_path)
-			ft_err_path(this);
 		current = current->next;
 	}
 	this->file_fd[INFILE_FD] = open(this->infile, O_RDONLY);

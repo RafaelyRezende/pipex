@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 15:35:46 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/07/07 09:53:34 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/20 17:02:55 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	ptr = (char *)s;
 	iter = ft_countwords(ptr, (unsigned char)c);
+	if (!iter)
+		return (NULL);
 	matrix = (char **) malloc(sizeof(char *) * (iter + 1));
 	if (!matrix)
 		return (NULL);
