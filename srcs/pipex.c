@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:46:58 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 15:33:22 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:59:00 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,11 @@ int	ft_init_env(t_env *this, int argc, char **argv, char **envp)
 	while (current)
 	{
 		current->cmd_path = ft_get_fullpath(envp, current);
-		if (!current->cmd_path)
-			ft_err_path(this);
 		current = current->next;
 	}
 	this->file_fd[INFILE_FD] = open(this->infile, O_RDONLY);
-	if (this->file_fd[INFILE_FD] < 0)
-		ft_err_dir(this);
 	this->file_fd[OUTFILE_FD] = open(this->outfile, \
 O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (this->file_fd[OUTFILE_FD] < 0)
-		ft_err_dir(this);
 	return (0);
 }
 

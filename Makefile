@@ -6,7 +6,7 @@
 #    By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/16 08:47:29 by rluis-ya          #+#    #+#              #
-#    Updated: 2025/09/20 18:14:27 by rluis-ya         ###   ########.fr        #
+#    Updated: 2025/09/22 18:18:47 by rluis-ya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = cc
 
 NAME = pipex
 
-NAME_BONUS = pipex_bonus
+NAME_BONUS = .bonus
 
 HEADER = include/libpipex.h
 
@@ -59,11 +59,13 @@ all: $(NAME)
 bonus: $(NAME_BONUS)
 
 $(NAME): $(OBJS) $(LFT)
+	@rm -rf $(NAME_BONUS)
 	@$(CC) $(CFLAGS) $^ -o $(NAME)
 	@echo "Compiled Program"
 
 $(NAME_BONUS): $(OBJS_BONUS) $(LFT)
-	@$(CC) $(CFLAGS) $^ -o $(NAME_BONUS)
+	@rm -rf srcs/main.o
+	@$(CC) $(CFLAGS) $^ -o $(NAME)
 	@echo "Compiled Bonus"
 
 $(LFT):
@@ -73,6 +75,7 @@ norm:
 
 clean:
 	@$(MAKE) -C libft clean
+	@rm -rf $(NAME_BONUS)
 	@rm -f $(OBJS) $(OBJS_BONUS)
 	@echo "Cleaned object files"
 

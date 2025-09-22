@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:05:06 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 15:05:13 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:56:19 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	t_cmd	*current;
 	int		prev_pipe_read;
 
-	if (argc < 5)
+	if (argc != 5)
 		return (ft_error_args());
 	if (ft_init_env(&this, argc, argv, envp))
 		return (ft_cleanup_all(&this), -1);

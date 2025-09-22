@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:46:24 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 16:51:54 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:57:51 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,22 @@ char	*ft_get_fullpath(char **envp, t_cmd *head)
 
 	current = head;
 	i = 0;
-	while (envp[i])
+	while (envp && envp[i])
 	{
 		if (!ft_strncmp(envp[i], "PATH=", 5))
 			break ;
 		i++;
 	}
-	secure_paths = ft_split(envp[i], ':');
-	if (!secure_paths)
-		return (NULL);
-	tmp = ft_verify_command(secure_paths, head->cmd_split[0]);
-	ft_free_all(secure_paths);
-	return (tmp);
+	if (envp)
+	{
+		secure_paths = ft_split(envp[i], ':');
+		if (!secure_paths)
+			return (NULL);
+		tmp = ft_verify_command(secure_paths, head->cmd_split[0]);
+		ft_free_all(secure_paths);
+		return (tmp);
+	}
+	return (NULL);
 }
 
 char	*ft_verify_command(char **s_paths, char *cmd)

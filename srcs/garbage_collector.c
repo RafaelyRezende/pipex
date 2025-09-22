@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:45:39 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 15:04:43 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:50:38 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_error_args(void)
 void	ft_err_pipe(t_env *this, int *prev_pipe)
 {
 	perror("pipe");
-	if (*prev_pipe != -1)
+	if (prev_pipe && *prev_pipe != -1)
 		close(*prev_pipe);
 	ft_close_files(this, 1);
 }

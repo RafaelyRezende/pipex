@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 08:44:30 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 15:19:53 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/22 11:58:35 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_err_handle(t_env *this, const char *str);
 void	ft_close_files(t_env *this, int scape);
 void	ft_close_pipes(t_cmd *current);
 void	ft_err_path(t_env *this);
+void	ft_close_cmd_pipes(t_cmd *current);
 /*	PARSER COMMANDS	*/
 int		ft_get_commands(t_cmd **head, char **av, int ac);
 char	*ft_verify_command(char **s_paths, char *cmd);

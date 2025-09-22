@@ -6,7 +6,7 @@
 /*   By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:05:06 by rluis-ya          #+#    #+#             */
-/*   Updated: 2025/09/20 17:36:16 by rluis-ya         ###   ########.fr       */
+/*   Updated: 2025/09/22 18:07:41 by rluis-ya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc < 5)
 		return (ft_error_args());
+	this.limiter = NULL;
 	if (ft_ishere_doc(argv))
 	{
 		if (ft_init_here(&this, argc, argv, envp) < 0)
