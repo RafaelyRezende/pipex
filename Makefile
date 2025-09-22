@@ -6,7 +6,7 @@
 #    By: rluis-ya <rluis-ya@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/16 08:47:29 by rluis-ya          #+#    #+#              #
-#    Updated: 2025/09/22 18:18:47 by rluis-ya         ###   ########.fr        #
+#    Updated: 2025/09/22 18:21:27 by rluis-ya         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ $(NAME): $(OBJS) $(LFT)
 
 $(NAME_BONUS): $(OBJS_BONUS) $(LFT)
 	@rm -rf srcs/main.o
+	@touch $(NAME_BONUS) 
 	@$(CC) $(CFLAGS) $^ -o $(NAME)
 	@echo "Compiled Bonus"
 
