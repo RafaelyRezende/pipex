@@ -1,5 +1,5 @@
 
-# Pipex - A 42 Network Project
+# Pipex
 
 ![Grade](https://img.shields.io/badge/Grade-125%25-brightgreen)
 ![Bonus](https://img.shields.io/badge/Bonus-Complete-brightgreen)
